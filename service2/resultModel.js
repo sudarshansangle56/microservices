@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const resultSchema = new mongoose.Schema({
-  username: String,
+  username: { type: String, required: true },
   score: Number,
   total: Number,
   date: { type: Date, default: Date.now }

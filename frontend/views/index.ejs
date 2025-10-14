@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Online Quiz System</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Welcome to Online Quiz System</h1>
-  <form action="/quiz" method="get">
-    <button type="submit">Start Quiz</button>
-  </form>
-  <br><br>
-  <a href="/add-question"><button>Add Question</button></a>
+    <div class="container">
+        <h1>Welcome to the Microservice Quiz App!</h1>
+        <div class="nav-links">
+            <a href="/quiz" class="btn">Take Quiz</a>
+            <a href="/add-question" class="btn">Add a Question</a>
+            <a href="/results" class="btn">View All Results</a>
+        </div>
+    </div>
 </body>
 </html>

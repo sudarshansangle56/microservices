@@ -8,12 +8,15 @@ app.use(express.json());
 
 connectDB();
 
-// Route 1: Submit quiz result
+// Submit Quiz Result
 app.post("/submit", async (req, res) => {
   try {
     const { username, answers } = req.body;
 
-    // Fetch questions from quiz service
+    if (!username || !answers) {
+      return res.status(400).json({ error: "Username and answers required" });
+    }
+
     const { data: questions } = await axios.get("http://localhost:5001/questions");
 
     let score = 0;
@@ -24,7 +27,7 @@ app.post("/submit", async (req, res) => {
     const newResult = await Result.create({
       username,
       score,
-      total: questions.length,
+      total: questions.length
     });
 
     res.json({ message: "Result saved", result: newResult });
@@ -33,10 +36,14 @@ app.post("/submit", async (req, res) => {
   }
 });
 
-// Route 2: View all results
+// View All Results
 app.get("/results", async (req, res) => {
-  const results = await Result.find();
-  res.json(results);
+  try {
+    const results = await Result.find();
+    res.json(results);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(5002, () => console.log("Result Service running on port 5002"));

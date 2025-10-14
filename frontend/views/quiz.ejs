@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Quiz</title>
-  <link rel="stylesheet" href="/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Take the Quiz</h1>
-
-  <form action="/submit" method="POST">
-    <input type="text" name="username" placeholder="Enter your name" required><br><br>
-
-    <% questions.forEach((q, index) => { %>
-      <div class="question">
-        <p><%= index + 1 %>. <%= q.question %></p>
-        <% q.options.forEach(option => { %>
-          <label>
-            <input type="radio" name="q<%= index %>" value="<%= option %>" required> <%= option %>
-          </label><br>
-        <% }) %>
-      </div>
-      <hr>
-    <% }) %>
-
-    <button type="submit">Submit Quiz</button>
-  </form>
+    <div class="container">
+        <h1>Quiz Time!</h1>
+        <form action="/submit" method="POST">
+            <div class="form-group">
+                <label for="username">Enter Your Name:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <hr>
+            <% if (locals.questions && questions.length > 0) { %>
+                <% questions.forEach((q, index) => { %>
+                    <div class="question-block">
+                        <h3><%= index + 1 %>. <%= q.question %></h3>
+                        <% if (q.options) { %>
+                            <% q.options.forEach(option => { %>
+                                <div class="option">
+                                    <%# This is the fix. (option || '') makes sure we never call .replace() on null %>
+                                    <input type="radio" id="q<%= index %>-<%= (option || '').replace(/\s/g, '-') %>" name="answers[<%= index %>]" value="<%= option %>" required>
+                                    <label for="q<%= index %>-<%= (option || '').replace(/\s/g, '-') %>"><%= option || '[Blank Option]' %></label>
+                                </div>
+                            <% }); %>
+                        <% } %>
+                    </div>
+                <% }); %>
+                <button type="submit" class="btn">Submit Quiz</button>
+            <% } else { %>
+                <p>No questions available to display.</p>
+            <% } %>
+        </form>
+    </div>
 </body>
 </html>
