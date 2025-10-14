@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quiz</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Take the Quiz</h1>
+
+  <form action="/submit" method="POST">
+    <input type="text" name="username" placeholder="Enter your name" required><br><br>
+
+    <% questions.forEach((q, index) => { %>
+      <div class="question">
+        <p><%= index + 1 %>. <%= q.question %></p>
+        <% q.options.forEach(option => { %>
+          <label>
+            <input type="radio" name="q<%= index %>" value="<%= option %>" required> <%= option %>
+          </label><br>
+        <% }) %>
+      </div>
+      <hr>
+    <% }) %>
+
+    <button type="submit">Submit Quiz</button>
+  </form>
+</body>
+</html>

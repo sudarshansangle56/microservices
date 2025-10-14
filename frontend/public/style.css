@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 30px;
+    background-color: #f5f6fa;
+  }
+  
+  h1 {
+    color: #273c75;
+  }
+  
+  form {
+    display: inline-block;
+    text-align: left;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  button {
+    background: #0097e6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #40739e;
+  }
+  
+  .question {
+    margin-bottom: 10px;
+  }
+  
