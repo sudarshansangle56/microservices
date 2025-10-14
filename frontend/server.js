@@ -41,5 +41,27 @@ app.post("/submit", async (req, res) => {
     res.send("Error submitting quiz");
   }
 });
+// --- ADD QUESTION PAGE ---
+app.get("/add-question", (req, res) => {
+    res.render("add-question");
+  });
+  
+  // --- HANDLE QUESTION SUBMIT ---
+  app.post("/add-question", async (req, res) => {
+    try {
+      const { question, option1, option2, option3, answer } = req.body;
+  
+      await axios.post("http://localhost:5001/add-question", {
+        question,
+        options: [option1, option2, option3],
+        answer,
+      });
+  
+      res.send("<h2>Question Added Successfully!</h2><a href='/'>Back to Home</a>");
+    } catch (error) {
+      res.send("Error adding question: " + error.message);
+    }
+  });
+  
 
 app.listen(5000, () => console.log("Frontend running on port 5000"));
