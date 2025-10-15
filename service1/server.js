@@ -1,4 +1,3 @@
-// service1/server.js
 
 const express = require("express");
 const connectDB = require("./db");
@@ -8,16 +7,14 @@ const app = express();
 app.use(express.json());
 connectDB();
 
-// Add Question
+
 app.post("/add-question", async (req, res) => {
   try {
     const { question, options, answer } = req.body;
 
-    // --- IMPROVED VALIDATION ---
     if (!question || !options || !answer) {
       return res.status(400).json({ error: "All fields are required" });
     }
-    // Check if options is an array and if any option is an empty string
     if (!Array.isArray(options) || options.some(opt => typeof opt !== 'string' || opt.trim() === '')) {
         return res.status(400).json({ error: "Options cannot be empty." });
     }
@@ -34,7 +31,7 @@ app.post("/add-question", async (req, res) => {
   }
 });
 
-// Get All Questions
+
 app.get("/questions", async (req, res) => {
   try {
     const questions = await Quiz.find();

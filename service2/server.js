@@ -8,7 +8,7 @@ app.use(express.json());
 
 connectDB();
 
-// Submit Quiz Result
+
 app.post("/submit", async (req, res) => {
   try {
     const { username, answers } = req.body;
