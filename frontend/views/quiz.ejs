@@ -1,40 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Quiz</title>
 </head>
-<body>
-    <div class="container">
-        <h1>Quiz Time!</h1>
-        <form action="/submit" method="POST">
-            <div class="form-group">
-                <label for="username">Enter Your Name:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <hr>
-            <% if (locals.questions && questions.length > 0) { %>
-                <% questions.forEach((q, index) => { %>
-                    <div class="question-block">
-                        <h3><%= index + 1 %>. <%= q.question %></h3>
-                        <% if (q.options) { %>
-                            <% q.options.forEach(option => { %>
-                                <div class="option">
-                                    <%# This is the fix. (option || '') makes sure we never call .replace() on null %>
-                                    <input type="radio" id="q<%= index %>-<%= (option || '').replace(/\s/g, '-') %>" name="answers[<%= index %>]" value="<%= option %>" required>
-                                    <label for="q<%= index %>-<%= (option || '').replace(/\s/g, '-') %>"><%= option || '[Blank Option]' %></label>
-                                </div>
-                            <% }); %>
-                        <% } %>
-                    </div>
-                <% }); %>
-                <button type="submit" class="btn">Submit Quiz</button>
-            <% } else { %>
-                <p>No questions available to display.</p>
-            <% } %>
-        </form>
-    </div>
+<body style="font-family: Arial, sans-serif; background: #f3f4f6; margin: 0; padding: 0;">
+
+  <%- include("partials/navbar") %>
+
+  <div class="container" style="max-width: 700px; margin: 60px auto; background: #ffffff; padding: 35px 45px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <h1 style="text-align: center; color: #1f2937; margin-bottom: 25px;">Quiz Time!</h1>
+
+    <form action="/submit" method="POST" style="display: flex; flex-direction: column; gap: 25px;">
+      
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="username" style="font-weight: 600; color: #374151; margin-bottom: 6px;">Enter Your Name:</label>
+        <input type="text" id="username" name="username" required 
+          style="padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px;">
+      </div>
+
+      <% if (locals.questions && questions.length > 0) { %>
+        <% questions.forEach((q, index) => { %>
+          <div class="question-block" style="border: 1px solid #e5e7eb; border-radius: 10px; padding: 15px 20px; background: #f9fafb;">
+            <h3 style="color: #1f2937; margin-bottom: 10px;"><%= index + 1 %>. <%= q.question %></h3>
+            
+            <% q.options.forEach((opt, i) => { %>
+              <div class="option" style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                <input type="radio" id="q<%= index %>_<%= i %>" name="answers[<%= index %>]" value="<%= opt %>" required>
+                <label for="q<%= index %>_<%= i %>" style="color: #374151; cursor: pointer;"><%= opt %></label>
+              </div>
+            <% }) %>
+          </div>
+        <% }) %>
+
+        <button type="submit" 
+          style="background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.3s;">
+          Submit Quiz
+        </button>
+
+      <% } else { %>
+        <p style="color: #6b7280; text-align: center;">No questions available.</p>
+      <% } %>
+    </form>
+  </div>
+
 </body>
 </html>

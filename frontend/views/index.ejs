@@ -1,19 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
 </head>
-<body>
-    <div class="container">
-        <h1>Welcome to the Microservice Quiz App!</h1>
-        <div class="nav-links">
-            <a href="/quiz" class="btn">Take Quiz</a>
-            <a href="/add-question" class="btn">Add a Question</a>
-            <a href="/results" class="btn">View All Results</a>
-        </div>
+<body 
+  style="
+    font-family: Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    background: url('/question_marks_background.jpg') no-repeat center center fixed; 
+    background-size: cover;
+  ">
+
+  <%- include('partials/navbar') %>
+
+  <div class="container" 
+    style="
+      max-width: 700px; 
+      margin: 100px auto; 
+      background: rgba(255, 255, 255, 0.611); 
+      padding: 40px; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+      text-align: center;
+    ">
+    
+    <h1 style="color: #1f2937; margin-bottom: 15px;">
+      Welcome to the Microservice Quiz App!
+    </h1>
+
+    <p style="color: #4b5563; font-size: 18px; margin-bottom: 30px;">
+      Test your knowledge and track your performance.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+      <a href="/quiz" 
+         style="background-color: #2563eb; color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: background 0.3s;">
+         Take Quiz
+      </a>
+      <a href="/add-question" 
+         style="background-color: #16a34a; color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: background 0.3s;">
+         Add a Question
+      </a>
+      <a href="/results" 
+         style="background-color: #9333ea; color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; transition: background 0.3s;">
+         View All Results
+      </a>
     </div>
+  </div>
+
 </body>
 </html>

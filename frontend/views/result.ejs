@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Results</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Results</title>
 </head>
-<body>
-    <div class="container">
-        
-        <% if (locals.result) { %>
-            <div class="score-card">
-                <h2>Hi <%= result.username %>, You're Done!</h2>
-                <p class="score">Your Score: <%= result.score %> / <%= result.total %></p>
-            </div>
-        <% } %>
+<body style="font-family: Arial, sans-serif; background: #f3f4f6; margin: 0; padding: 0;">
 
-        <h1>All Past Results</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Username</th>
-                    <th>Score</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-              <% if (locals.allResults && allResults.length > 0) { %>
-                  <% allResults.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(res => { %>
-                      <tr>
-                          <td><%= res.username %></td>
-                          <td><%= res.score %> / <%= res.total %></td>
-                          <td><%= new Date(res.date).toLocaleString() %></td>
-                      </tr>
-                  <% }); %>
-              <% } else { %>
-                  <tr>
-                      <td colspan="3">No results found.</td>
-                  </tr>
-              <% } %>
-          </tbody>
-        </table>
-        <a href="/" class="home-link">Back to Home</a>
-    </div>
+  <%- include("partials/navbar") %>
+
+  <div class="container" style="max-width: 800px; margin: 60px auto; background: #ffffff; padding: 35px 45px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    
+    <% if (locals.result) { %>
+      <div class="score-card" style="text-align: center; background: #e0f2fe; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
+        <h2 style="color: #1d4ed8; margin-bottom: 8px;">Hi <%= result.username %> 👋</h2>
+        <p class="score" style="font-size: 18px; color: #374151;">
+          You scored <strong><%= result.score %></strong> out of <%= result.total %>
+        </p>
+      </div>
+    <% } %>
+
+    <h2 style="text-align: center; color: #1f2937; margin-bottom: 20px;">All Results</h2>
+
+    <table class="results-table" style="width: 100%; border-collapse: collapse; text-align: center; background: #f9fafb; border-radius: 10px; overflow: hidden;">
+      <thead>
+        <tr style="background-color: #2563eb; color: white;">
+          <th style="padding: 12px;">Username</th>
+          <th style="padding: 12px;">Score</th>
+          <th style="padding: 12px;">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (allResults && allResults.length > 0) { %>
+          <% allResults.forEach(res => { %>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 10px; color: #374151;"><%= res.username %></td>
+              <td style="padding: 10px; color: #374151;"><%= res.score %> / <%= res.total %></td>
+              <td style="padding: 10px; color: #6b7280;"><%= new Date(res.date).toLocaleString() %></td>
+            </tr>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="3" style="padding: 15px; color: #6b7280;">No results found</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+
 </body>
 </html>

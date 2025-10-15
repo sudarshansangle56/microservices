@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Question</title>
-    <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Question</title>
 </head>
-<body>
-    <div class="container">
-        <h1>Add a New Question</h1>
-        <form action="/add-question" method="POST" class="form-card">
-            <div class="form-group">
-                <label for="question">Question:</label>
-                <input type="text" id="question" name="question" required>
-            </div>
-            <div class="form-group">
-                <label>Options (4 required):</label>
-                <input type="text" name="options" placeholder="Option 1" required>
-                <input type="text" name="options" placeholder="Option 2" required>
-                <input type="text" name="options" placeholder="Option 3" required>
-                <input type="text" name="options" placeholder="Option 4" required>
-            </div>
-            <div class="form-group">
-                <label for="answer">Correct Answer (must match one option exactly):</label>
-                <input type="text" id="answer" name="answer" required>
-            </div>
-            <button type="submit" class="btn">Add Question</button>
-        </form>
-        <a href="/" class="home-link">Back to Home</a>
-    </div>
+<body style="font-family: Arial, sans-serif; background: #f3f4f6; margin: 0; padding: 0;">
+
+  <%- include("partials/navbar") %>
+
+  <div class="container" style="max-width: 600px; margin: 60px auto; background: #ffffff; padding: 30px 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <h1 style="text-align: center; color: #1f2937; margin-bottom: 25px;">Add a New Question</h1>
+
+    <form action="/add-question" method="POST" style="display: flex; flex-direction: column; gap: 18px;">
+      
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="question" style="font-weight: 600; color: #374151; margin-bottom: 6px;">Question:</label>
+        <input type="text" id="question" name="question" required 
+          style="padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 15px;">
+      </div>
+
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label style="font-weight: 600; color: #374151; margin-bottom: 6px;">Options:</label>
+        <input type="text" name="options" placeholder="Option 1" required style="margin-bottom: 8px; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+        <input type="text" name="options" placeholder="Option 2" required style="margin-bottom: 8px; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+        <input type="text" name="options" placeholder="Option 3" required style="margin-bottom: 8px; padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+        <input type="text" name="options" placeholder="Option 4" required style="padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+      </div>
+
+      <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="answer" style="font-weight: 600; color: #374151; margin-bottom: 6px;">Correct Answer:</label>
+        <input type="text" id="answer" name="answer" required 
+          style="padding: 10px; border: 1px solid #d1d5db; border-radius: 8px;">
+      </div>
+
+      <button type="submit" 
+        style="background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 16px; cursor: pointer; transition: background 0.3s;">
+        Add Question
+      </button>
+    </form>
+  </div>
+
 </body>
 </html>
